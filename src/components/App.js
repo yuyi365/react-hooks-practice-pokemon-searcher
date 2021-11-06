@@ -1,10 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PokemonPage from "./PokemonPage";
 
-function App() {
+const App = () => {
+  
+  const [allPokemons, setAllPokemons] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:3001/pokemon")
+    .then((res) => res.json())
+    .then((data) => setAllPokemons(data))
+  }, [])
+
   return (
     <div className="App">
-      <PokemonPage />
+      <PokemonPage
+        allPokemons={allPokemons}
+        setAllPokemons={setAllPokemons}
+      />
     </div>
   );
 }
